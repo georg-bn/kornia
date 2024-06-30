@@ -66,12 +66,12 @@ class DiscreteSteerer(Module):
                     for _ in range(descriptor_dim // 4)
                 )
             )
-            return DiscreteSteerer(generator).eval()
+            return cls(generator).eval()
         elif generator_type == "SO2":
             lie_generator = torch.block_diag(
                 torch.zeros(
-                    [descriptor_dim - 12 * descriptor_dim // 14,
-                     descriptor_dim - 12 * descriptor_dim // 14],
+                    [descriptor_dim - 12 * (descriptor_dim // 14),
+                     descriptor_dim - 12 * (descriptor_dim // 14)],
                 ),
                 *(
                     torch.tensor([[0., j],
@@ -81,6 +81,6 @@ class DiscreteSteerer(Module):
                 ),
             )
             generator = torch.matrix_exp((2 * 3.14159 / steerer_order) * lie_generator)
-            return DiscreteSteerer(generator).eval()
+            return cls(generator).eval()
         else:
             raise ValueError
