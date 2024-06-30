@@ -17,7 +17,8 @@ class DiscreteSteerer(Module):
         >>> desc = torch.randn(512, 128)
         >>> generator = torch.randn(128, 128)
         >>> steerer = DiscreteSteerer(generator)
-        >>> steered_desc = steerer.steer_descriptions(desc, steerer_power=3, normalize=True)  # steer 3 times
+        >>> # steer 3 times:
+        >>> steered_desc = steerer.steer_descriptions(desc, steerer_power=3, normalize=True)
     """
     def __init__(self, generator: Tensor) -> None:
         super().__init__()
